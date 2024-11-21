@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY package.json .
 
-RUN bun
+RUN bun install
 
 COPY . .
 
