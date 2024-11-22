@@ -35,7 +35,17 @@ export class UserService {
       })
   }
 
-  // async getProfile(id: string) {
-  //     return
-  // }
+  async delete(userId: string) {
+      this.prisma.user.delete({
+          where: {
+              id: userId
+          }
+      })
+  }
+
+  async getProfile(userId: string) {
+      const profile = this.getById(userId)
+
+
+  }
 }
