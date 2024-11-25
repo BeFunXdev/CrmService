@@ -11,6 +11,9 @@ export class UserService {
       return this.prisma.user.findUnique({
           where: {
               id
+          },
+          include: {
+              tasks: true
           }
       });
   }
@@ -44,8 +47,25 @@ export class UserService {
   }
 
   async getProfile(userId: string) {
-      const profile = this.getById(userId)
+      const profile = await this.getById(userId)
+      const {password, ...rest } = profile
+
+      const totalTasks = profile.tasks.length
+      const completedTasks= await this.prisma.task.count({
+          where: {
+              userId,
+              isComplited: true
+          }
+      })
 
 
+
+      return {
+          user: rest,
+          statistics: [
+              {label: "Total", value: totalTasks},
+              {label: "Completed Tasks", value: completedTasks}
+          ]
+      }
   }
 }
