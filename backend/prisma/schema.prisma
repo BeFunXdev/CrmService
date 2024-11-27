@@ -41,6 +41,15 @@ model Task {
   @@map("task")
 }
 
+model TimeBlock {
+  id         String @id @default(cuid())
+  name       String
+  timeMinets Int
+  order      Int
+
+  @@map("time-block")
+}
+
 enum Priority {
   high
   medium
