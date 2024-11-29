@@ -1,21 +1,28 @@
-import {axiosClassic} from "@/api/intersetion";
-import {IAuthLoginForm, IAuthResponse} from "@/types/authTypes";
-import {saveTokenStorage} from "@/services/authTokens";
+import { IAuthLoginForm, IAuthResponse } from '@/types/authTypes'
+
+import { axiosClassic } from '@/api/intersetion'
+
+import { saveTokenStorage } from '@/services/authTokens'
 
 export const authService = {
-    async main(type: 'login' | 'register', data: IAuthLoginForm) {
-        const response = await axiosClassic.post<IAuthResponse>('/auth/' + type, data)
+	async main(type: 'login' | 'register', data: IAuthLoginForm) {
+		const response = await axiosClassic.post<IAuthResponse>(
+			'/auth/' + type,
+			data
+		)
 
-        if (response.data.accessToken) saveTokenStorage(response.data.accessToken)
+		if (response.data.accessToken) saveTokenStorage(response.data.accessToken)
 
-        return response
-    },
+		return response
+	},
 
-    async getNewTokens() {
-        const response = await axiosClassic.post<IAuthResponse>('/login/access-token')
+	async getNewTokens() {
+		const response = await axiosClassic.post<IAuthResponse>(
+			'/login/access-token'
+		)
 
-        if (response.data.accessToken) saveTokenStorage(response.data.accessToken)
+		if (response.data.accessToken) saveTokenStorage(response.data.accessToken)
 
-        return response
-    }
+		return response
+	}
 }
