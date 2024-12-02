@@ -21,7 +21,8 @@ model User {
   CreatedAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
-  tasks Task[]
+  tasks     Task[]
+  TimeBlock TimeBlock[]
 
   @@map("user")
 }
@@ -42,10 +43,14 @@ model Task {
 }
 
 model TimeBlock {
-  id         String @id @default(cuid())
-  name       String
-  timeMinets Int
-  order      Int
+  id          String @id @default(cuid())
+  name        String
+  timeMinutes Int
+  order       Int
+  weekDay     Week
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
 
   @@map("time-block")
 }
@@ -54,4 +59,15 @@ enum Priority {
   high
   medium
   low
+}
+
+enum Week {
+  monday
+  tuesday
+  wednesday
+  thursday
+  friday
+  saturday
+  sunday
+  everyday
 }
