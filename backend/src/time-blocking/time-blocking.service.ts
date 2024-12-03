@@ -32,7 +32,7 @@ export class TimeBlockingService {
             return this.prisma.timeBlock.findFirst({
                 where: {
                     userId,
-                    weekDay: Week.everyDay
+                    weekDay: Week.everyday
                 }
             })
         } else {
