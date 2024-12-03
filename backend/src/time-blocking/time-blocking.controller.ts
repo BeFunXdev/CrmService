@@ -2,7 +2,7 @@ import {Body, Controller, Delete, Get, HttpCode, Param, Post, Put, UsePipes, Val
 import { TimeBlockingService } from './time-blocking.service';
 import {Auth} from "../auth/decorators/auth.decorator";
 import {CurrentUser} from "../auth/decorators/user.decorator";
-import {TimeBlockingDto} from "./dto/time-blocking.dto";
+import {TimeBlockingDto, UpdateOrderDto} from "./dto/time-blocking.dto";
 
 @Controller('time-blocks')
 export class TimeBlockingController {
@@ -41,7 +41,7 @@ export class TimeBlockingController {
   @Put('update-order')
   @HttpCode(200)
   @Auth()
-  async updateOder(@Body() ids: string[]) {
+  async updateOder(@Body() {ids}: UpdateOrderDto) {
     return this.timeBlockingService.updateOrder(ids)
   }
 

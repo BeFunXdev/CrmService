@@ -3,6 +3,7 @@ import { TaskService } from './task.service';
 import {Auth} from "../auth/decorators/auth.decorator";
 import {CurrentUser} from "../auth/decorators/user.decorator";
 import {TaskDto} from "./dto/task.dto";
+import {ApiExcludeEndpoint} from "@nestjs/swagger";
 
 @Controller('task')
 export class TaskController {

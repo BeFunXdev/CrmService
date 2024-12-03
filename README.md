@@ -3,7 +3,11 @@
 ## Backend
 ### Start
 Install dependents command:
-- ban install
+- bun install
 - prisma generate
 - prisma db push
 - bun start
+
+
+### Automatically generated documentation
+path: http://localhost:8000/docks
